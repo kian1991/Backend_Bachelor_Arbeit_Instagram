@@ -62,9 +62,9 @@ def get_all_media(user_id, limit=None): # limit * 12 zB. 1 = 12 einträge; 2 = 2
                 results = instagram_client.user_feed(user_id, max_id=next_max_id)
                 successful = True
             except Exception as e: # todo Fehlerbehandlung
-                print(f'ERROR # {e}: Trying again')
+                print('ERROR # ' + e + ': Trying again')
                 if 'Bad Request' in str(e):
-                    print(f'ERROR # {e}: Thread will pause a minute')
+                    print('ERROR # ' + e + ': Thread will pause a minute')
                     sleep(60)
                 else:
                     '''
