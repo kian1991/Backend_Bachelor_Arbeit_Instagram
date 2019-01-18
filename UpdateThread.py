@@ -54,7 +54,6 @@ def check__database_accounts():
 
 
             db['users'].update_one(filter, {'$set': current_info})
-            print('DONE:)')
 
         except Exception as e:
             print(e)
