@@ -1,8 +1,8 @@
 import re
 from collections import Counter
 '''
-    Dieses Modul nimmt einen Datensatz, in der für die Datenbank festgelegten Datenstuktur, entgegen berechnet
-    die Festgelegten Kennzahlen und Metriken
+    Dieses Modul nimmt einen die Medien eines Datensatz, in der für die Datenbank festgelegten Datenstuktur, 
+    entgegen berechnet die Festgelegten Kennzahlen und Metriken
 '''
 
 

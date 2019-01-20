@@ -6,7 +6,7 @@ from util.database import db
 STORETHREAD = None  # In dieser Variable wird der Thread zur Speicherung der neuen Accountdaten gespeichert
 
 
-def get_response(username, limit):
+def get_available_data(username, limit):
     global STORETHREAD
     try:
         user_info = instagram_client.username_info(username)

@@ -3,12 +3,14 @@
 # Imports
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
-from util.database_io import get_response
+from flask_cors import CORS
+from util.database_io import get_available_data
 
 
 
 # Flask initialisieren
 app = Flask(__name__)
+cors = CORS(app, resources={r"/users/*": {"origins": "*"}})
 api = Api(app)
 
 
@@ -20,7 +22,7 @@ class Users(Resource):
         args = parser.parse_args()
         limit = args['limit']
 
-        response, is_available = get_response(username, limit)
+        response, is_available = get_available_data(username, limit)
         if is_available:
             return response
         else:
@@ -30,4 +32,4 @@ class Users(Resource):
 api.add_resource(Users, '/users/<string:username>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

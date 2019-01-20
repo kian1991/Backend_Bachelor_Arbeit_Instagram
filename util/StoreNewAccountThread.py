@@ -17,16 +17,6 @@ class StoreNewAccountThread(Thread):
 
 
 
-
-'''
-    Diese Funktion splittet daten - in diesem Fall die Medien - in parts.
-    Dies ist nötig da MongoDB standardgemäß ein Datengröße-Limit von 16MB hat.
-'''
-def chunks(list, size):
-    for i in range(0, len(list), size):
-        yield list[i:i + size]
-
-
 def store_new_user(user, media):
 
     user['_id'] = user['pk']
@@ -35,17 +25,8 @@ def store_new_user(user, media):
         'checked_at': int(time()),
         'follower_count': user['follower_count']}]
     user['hashtags'] = calculate_engagement_extract_hashtags(media, user['follower_count'])
-    '''
-        Zu diesem Zeitpunkt ist der Komplette Datensatz analysiert und komplettiert. 
-        Die Medien müssen vorerst wieder entfernt und dann sukzessive in die Daten Bank geschrieben werden.
-        Da allerdings die Dokumentengröße 16 MB nicht übersteigen darf werden nicht mehr als 3000 einträge gespeichert
-    '''
     user['media'] = media
     db['users'].insert_one(user)
-    '''for chunk in chunks(media, 400):
-        db['users'].update_one({'_id': user['pk']},
-                           {'$addToSet': {'media':
-                                              {'$each': chunk}}})'''
 
 
 '''3000 Limit'''

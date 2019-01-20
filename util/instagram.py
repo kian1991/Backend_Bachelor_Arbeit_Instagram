@@ -5,20 +5,6 @@ from instagram_private_api import Client, ClientCookieExpiredError, ClientLoginR
 import json
 import codecs
 
-#TESTVARS
-kian = 1230966812 #200
-campus = 1550978930 #2k
-testkurs = 6378055205 #3
-ur_team = 427201280 #20k
-nessy = 48473359
-losteria = 1755534621
-vapiano = 13979694
-shape_up_challenge = 9940939857  # 60 Follower
-kianenix = 1230966812  # 300 Follower
-itsmeganlynn = 3597629847  # 5k Follower
-slittlebirds = 903939235  # 208k 900 Beiträge
-
-
 def login(username, password):
     # Try load the cookie_jar
     device_id = None

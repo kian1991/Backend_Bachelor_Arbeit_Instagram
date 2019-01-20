@@ -8,7 +8,7 @@ from util.instagram_analyzer import calculate_engagement_extract_hashtags
 '''
 
 # Der Prozess soll alle 10 Minuten anfangen, die Datenbank aufzufrischen
-update_interval = 5
+update_interval = 60 * 10
 
 
 def check__database_accounts():
