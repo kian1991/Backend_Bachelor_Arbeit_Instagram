@@ -24,17 +24,17 @@ def calculate_engagement_extract_hashtags(media, follower_count):
                 hashtags.extend(tags_in_media)
 
         if follower_count != 0:
-            if media_entry['like_count']:  # Wenn likes vorhanden sind
+            try:  # Wenn likes vorhanden sind
                 like_count = media_entry['like_count']
-            else:
+            except KeyError:
                 like_count = 0
 
-            if media_entry['comment_count']:  # Wenn kommentare vorhanden sind
+            try:  # Wenn kommentare vorhanden sind
                 comment_count = media_entry['comment_count']
-            else:
+            except KeyError:
                 comment_count = 0
 
-                engagement_rate = (like_count + comment_count) / follower_count * 100
+            engagement_rate = (like_count + comment_count) / follower_count * 100
 
         media_entry['engagement_rate'] = engagement_rate
         continue
