@@ -48,7 +48,7 @@ def check__database_accounts():
                     else:
                         old_tags[tag] = count
 
-                db['users'].update_one(filter, {'$push': {'media': new_media}})
+                db['users'].update_one(filter, {'$push': {'media': {'$each': new_media, '$postition': 0}}})
                 db['users'].update_one(filter, {'$set': {'hashtags': new_hashtags}})
 
 
