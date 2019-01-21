@@ -13,7 +13,7 @@ db.follower - speicherung der follower + timestamp
 '''
 
 # Client initialisieren
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://naik.ml:27017/')
 
 # Datenbank auswählen
 db = client['BA_DB']
