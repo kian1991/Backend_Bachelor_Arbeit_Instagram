@@ -17,7 +17,7 @@ def check__database_accounts():
     cursor = db['users'].find()
     # Über den Cursor iterieren
     for account in cursor:
-        print(account['username'])
+        print('Updating Information: ' + account['username'])
         try:
             # aktuelle Profildaten abrufen und mit DB-Eintrag vergleichen
             current_info = instagram_client.user_info(account['pk'])['user']
@@ -48,7 +48,7 @@ def check__database_accounts():
                     else:
                         old_tags[tag] = count
 
-                db['users'].update_one(filter, {'$push': {'media': {'$each': new_media, '$postition': 0}}})
+                db['users'].update_one(filter, {'$push': {'media': {'$each': new_media, '$position': 0}}})
                 db['users'].update_one(filter, {'$set': {'hashtags': new_hashtags}})
 
 
@@ -56,7 +56,7 @@ def check__database_accounts():
             db['users'].update_one(filter, {'$set': current_info})
 
         except Exception as e:
-            print('ERROR:' + e)
+            print('ERROR:' + str(e))
 
 
 if __name__ == '__main__':
