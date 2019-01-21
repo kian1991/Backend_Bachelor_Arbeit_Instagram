@@ -34,7 +34,7 @@ def check__database_accounts():
 
             # Medien
             if account['media_count'] != current_info['media_count']:
-                new_media = instagram_client.user_feed(account['pk'])['media']
+                new_media = instagram_client.user_feed(account['pk'])['items']
                 # nur neue Einträge herausfiltern, das Veröffentlichungsdatum wird mit dem, der neusten Veröffentlichung
                 # in der Datenbank verglichen.
                 new_media = [m for m in new_media if m['taken_at'] > account['media'][0]['taken_at']]
@@ -43,7 +43,7 @@ def check__database_accounts():
                 # Die neuen Hashtags zu den alten hinzu addieren hinzufügen
                 old_tags = account['hashtags']
                 for tag, count in new_hashtags.items():
-                    if old_tags[tag]:
+                    if tag in old_tags:
                         old_tags[tag] += count
                     else:
                         old_tags[tag] = count
@@ -56,7 +56,7 @@ def check__database_accounts():
             db['users'].update_one(filter, {'$set': current_info})
 
         except Exception as e:
-            print(e)
+            print('ERROR:' + e)
 
 
 if __name__ == '__main__':
