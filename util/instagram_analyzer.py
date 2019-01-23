@@ -8,12 +8,13 @@ from collections import Counter
 
 
 '''
-    @:return Hashtagliste mit den sortierten Tags
+    Rückgabe ist ein objekt Array mit den extrahierten Hashtags
 '''
 def calculate_engagement_extract_hashtags(media, follower_count):
     hashtags = []
     for media_entry in media:
-        # Die Hashtags mittels einer Regular Expression herausfiltern, bietet sich hier an, da bereits über
+        # Die Hashtags mittels einer Regular Expression herausfiltern, 
+        # bietet sich hier an, da bereits über
         # die Medien iteriert wird
 
         engagement_rate = 0
@@ -37,12 +38,12 @@ def calculate_engagement_extract_hashtags(media, follower_count):
             engagement_rate = (like_count + comment_count) / follower_count * 100
 
         media_entry['engagement_rate'] = engagement_rate
-        continue
 
-    return _hashtag_counter(hashtags)
+    return __hashtag_counter(hashtags)
 
 
-def _hashtag_counter(tags):
+def __hashtag_counter(tags):
     counted_hashtags = Counter(tags)
-    sorted_and_counted_hashtags = {k: v for k, v in sorted(counted_hashtags.items(), key=lambda x: x[1], reverse=True)}
-    return sorted_and_counted_hashtags
+    return counted_hashtags
+
+

@@ -8,7 +8,7 @@ from util.instagram_analyzer import calculate_engagement_extract_hashtags
 '''
 
 # Der Prozess soll alle 10 Minuten anfangen, die Datenbank aufzufrischen
-update_interval = 60 * 10
+UPDATE_INTERVAL = 60 * 10
 
 
 def check__database_accounts():
@@ -35,8 +35,8 @@ def check__database_accounts():
             # Medien
             if account['media_count'] != current_info['media_count']:
                 new_media = instagram_client.user_feed(account['pk'])['items']
-                # nur neue Einträge herausfiltern, das Veröffentlichungsdatum wird mit dem, der neusten Veröffentlichung
-                # in der Datenbank verglichen.
+                # nur neue Einträge herausfiltern, das Veröffentlichungsdatum wird mit dem, 
+                # der neusten Veröffentlichung in der Datenbank verglichen.
                 new_media = [m for m in new_media if m['taken_at'] > account['media'][0]['taken_at']]
                 # Die Daten mit den aktuellen Abonnentenzahlen analysieren
                 new_hashtags = calculate_engagement_extract_hashtags(new_media, current_info['follower_count'])
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     while True:
         check__database_accounts()
-        sleep(update_interval)
+        sleep(UPDATE_INTERVAL)
 
 
 
