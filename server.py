@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Imports
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
@@ -10,10 +7,16 @@ from util.database_io import get_available_data
 
 # Flask initialisieren
 app = Flask(__name__)
-cors = CORS(app, resources={r"/users/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/users/*": {"origins": "*"}}) 
 api = Api(app)
 
-
+'''
+    Diese Klasse nimmt einen GET-Request entgegen, parsed parameter
+    und führt die Datenabfrage durch. Wenn Daten verfügbar sind
+    wird mit dem Status-Code 200 geantwortet, wenn nicht 202.
+    So kann am Frontend unterschieden werden on es ein Lade-Symbol
+    anzeigen soll oder nicht.
+'''
 class Users(Resource):
     def get(self, username):
         # Limit parameter mit dem RequestParser auslesen

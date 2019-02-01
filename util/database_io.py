@@ -22,8 +22,10 @@ def get_available_data(username, limit):
         if entry:
             if limit:
                entry['media'] = entry['media'][0:limit]
-            return entry, True  # Aus Datenbank lesen todo
+            return entry, True
         else:
+            # Durch diese Abfrage wird sichergestellt, dass nicht unendlich viele Threads gestartet werden
+            # können. Accounts werden somit nicht doppelt in der Datenbank angelegt
             if not STORETHREAD or not STORETHREAD.isAlive():
                 STORETHREAD = StoreNewAccountThread(user_info['user']['pk'])
                 STORETHREAD.start()
